@@ -1,0 +1,13 @@
+----------------- Options ---------------
+                batchSize: 1                             
+              contentPath: data/content/                 
+                     cuda: True                          
+              decoder_dir: models/dec_r41.pth            
+                 fineSize: 512                           
+                    layer: r41                           
+                 loadSize: 512                           
+               matrixPath: trainingOutput/edge/sobel/r41.pth
+                     outf: Artistic/sobel/               
+                stylePath: data/style/                   
+                  vgg_dir: models/vgg_r41.pth            
+----------------- End -------------------

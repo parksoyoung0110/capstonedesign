@@ -1,0 +1,8 @@
+# exported by https://3dviewer.net
+newmtl rubber_duck_toy
+Kd 0.8 0.8 0.8
+d 1
+Ka 0 0 0
+Ks 0.8 0.8 0.8
+Ns 00
+map_Kd ff.jpg

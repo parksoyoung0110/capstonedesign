@@ -1,0 +1,23 @@
+----------------- Options ---------------
+                batchSize: 8                             
+              contentPath: train2014                     
+           content_layers: ['r41']                       
+           content_weight: 10.0                          
+                     cuda: True                          
+              decoder_dir: models/dec_r41.pth            
+              edge_weight: 4                             
+                 fineSize: 256                           
+                   gpu_id: 0                             
+                    layer: r41                           
+                 loadSize: 300                           
+             log_interval: 500                           
+         loss_network_dir: models/vgg_r51.pth            
+                       lr: 0.0001                        
+                    niter: 10000                         
+                     outf: trainingOutput/ssim           
+            save_interval: 5000                          
+                stylePath: train                         
+             style_layers: ['r11', 'r21', 'r31', 'r41']  
+             style_weight: 0.02                          
+                  vgg_dir: models/vgg_r41.pth            
+----------------- End -------------------

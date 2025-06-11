@@ -1,0 +1,15 @@
+----------------- Options ---------------
+                batchSize: 1                             
+              contentPath: data/photo_real/content/images/
+           contentSegPath: data/photo_real/contentSeg/   
+                     cuda: False                         
+              decoder_dir: models/dec_r41.pth            
+                 fineSize: 512                           
+                    layer: r41                           
+                 loadSize: 512                           
+               matrixPath: trainingOutput/ssim/r41.pth   
+                     outf: Artistic/canny/               
+                stylePath: data/photo_real/style/images/ 
+             styleSegPath: data/photo_real/styleSeg/     
+                  vgg_dir: models/vgg_r41.pth            
+----------------- End -------------------
