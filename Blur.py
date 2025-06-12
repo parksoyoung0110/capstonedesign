@@ -3,7 +3,7 @@ import numpy as np
 from PIL import Image
 
 # 이미지 읽기
-image = cv2.imread('data/content/blub.png')
+image = cv2.imread('inter/blub_20/blub.png')
 image = image.astype(np.float32) / 255.0  # 0~1로 정규화
 
 # 가우시안 노이즈 생성
@@ -22,4 +22,4 @@ noisy_image_uint8 = (noisy_image * 255).astype(np.uint8)
 noisy_image_rgb = cv2.cvtColor(noisy_image_uint8, cv2.COLOR_BGR2RGB)
 
 # PIL로 저장
-Image.fromarray(noisy_image_rgb).save('data/content/blur/blub_0.5.png')
+Image.fromarray(noisy_image_rgb).save('inter/blub_8/blub_.png')

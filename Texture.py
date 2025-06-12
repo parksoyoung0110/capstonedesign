@@ -203,7 +203,7 @@ style='mesh/s1.jpg'
 sess = create_session(timeout_sec=0)
 
 #texture create
-NUM_VIEWS = 50
+NUM_VIEWS = 20
 k=0
 tex_res=512
 new_texture = np.zeros((TEXTURE_SIZE, TEXTURE_SIZE, 3), dtype=np.float32)
@@ -213,20 +213,21 @@ alpha_accumulator = np.zeros((TEXTURE_SIZE, TEXTURE_SIZE, 1), dtype=np.float32)
 import os
 
 # 경로를 변수로 정의
-view_dir = "views/blub_s1"
-inter_dir = "inter/blub_s1"
-final_dir = "final/blub_s1"
+view_dir = "views/blub_8_1"
+inter_dir = "inter/blub_8_1"
+final_dir = "final/blub_8_1"
 
 # 각 경로가 존재하지 않으면 생성
 os.makedirs(view_dir, exist_ok=True)
 os.makedirs(inter_dir, exist_ok=True)
 os.makedirs(final_dir, exist_ok=True)
 
-
+import time
+start_time = time.time()
 
 for i in range(NUM_VIEWS):
     print(k)
-    view = meshutil.sample_view(14.0, 14.0)
+    view = meshutil.sample_view(8, 8)
     fragments = renderer.render_mesh(
         modelview=view,
         position=mesh['position'], uv=mesh['uv'], face=mesh['face']
@@ -243,12 +244,10 @@ for i in range(NUM_VIEWS):
     mask_image = white_texture * t_alpha
 
     rendered_image_nps = sess.run(final_image)
-    plt.imshow(rendered_image_nps)
-    plt.show()
+
 
     mask_image_nps = sess.run(mask_image)
-    plt.imshow(mask_image_nps)
-    plt.show()
+
 
     content = torch.tensor(rendered_image_nps, dtype=torch.float32).unsqueeze(0).permute(0, 3, 1, 2)
     content = content.to('cpu')
@@ -337,8 +336,6 @@ for i in range(NUM_VIEWS):
     temp_texture_image = PIL.Image.fromarray(temp_texture)
     temp_texture_image.save(f"{inter_dir}/intermediate_texture_{k:04d}.png")
     original_texture=overlay_non_black(temp_texture_image, original_texture)
-    plt.imshow(original_texture)
-    plt.show()
 
     k=k+1
 
@@ -346,3 +343,6 @@ alpha_accumulator = np.clip(alpha_accumulator, 1e-5, None)
 final_texture = (new_texture / alpha_accumulator).astype(np.uint8)
 final_texture_image = PIL.Image.fromarray(final_texture.astype(np.uint8))
 final_texture_image.save(f"{final_dir}/final_texture.png")
+
+end_time = time.time()
+print("총 실행 시간: {:.2f}초".format(end_time - start_time))

@@ -60,10 +60,21 @@ def sample_view(min_dist, max_dist=None):
   range from the origin. ModelView matrix is returned.
   '''
   if max_dist is None:
-    max_dist = min_dist
+      max_dist = min_dist
   dist = np.random.uniform(min_dist, max_dist)
-  eye = np.random.normal(size=3)
-  eye = normalize(eye)*dist
+
+  # θ (theta): azimuthal angle ∈ [0, 2π)
+  theta = np.random.uniform(0, 2 * np.pi)
+
+  # φ (phi): polar angle ∈ [0, π) -- use inverse transform sampling for uniformity
+  phi = np.arccos(np.random.uniform(-1, 1))  # ensures uniform sampling on sphere
+
+  # Convert spherical coordinates to Cartesian
+  x = dist * np.sin(phi) * np.cos(theta)
+  y = dist * np.sin(phi) * np.sin(theta)
+  z = dist * np.cos(phi)
+
+  eye = np.array([x, y, z], dtype=np.float32)
   return lookat(eye)
 
 

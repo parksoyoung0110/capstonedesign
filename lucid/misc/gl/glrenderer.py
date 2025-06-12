@@ -6,7 +6,10 @@ import ctypes
 
 class GLObject(object):
   def __del__(self):
-    self.release()
+    try:
+        self.release()
+    except Exception:
+        pass
   def __enter__(self):
     bind_func, const = self._bind
     bind_func(const, self)
