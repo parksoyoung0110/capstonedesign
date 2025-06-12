@@ -1,10 +1,32 @@
 ## 프로젝트 요약 (Project Summary)
 
+본 프로젝트는 스타일 전이 과정에서 자주 손실되는 텍스처의 구조적 디테일을 효과적으로 보존하는 것을 목표로 하였으며, 이를 위해 다음과 같은 기술적 접근을 적용하였다.
 
-본 프로젝트는 스타일 전이 과정에서 자주 손실되는 텍스처의 구조적 디테일을 효과적으로 보존하는 것을 목표로 한다. 이를 위해 여러 가지 기술적 접근을 적용하였다. 첫째, Laplacian, Sobel, Canny Edge Detector를 활용하여 콘텐츠 이미지의 경계 정보를 추출하고, 스타일 전이 결과 이미지와 비교하여 디테일을 보존하는 Edge Loss를 설계하였다. 둘째, 기존의 픽셀 기반 콘텐츠 손실 함수 대신 SSIM(Structural Similarity Index)를 기반으로 한 콘텐츠 손실 함수를 적용하여 시각적 유사성과 구조적 일관성을 유지하고자 하였다. 셋째, 스타일 전이 후 뭉개진 저주파 성분을 제거하고 고주파 성분을 복원하기 위해 Guided Filter를 활용한 후처리 과정을 적용하였다. 넷째, 콘텐츠 이미지에 패턴이 부족하여 스타일 전이가 잘 이루어지지 않는 경우를 보완하고자 Gaussian 노이즈를 추가하여 스타일의 패턴이 더욱 효과적으로 전이되도록 유도하였다. 마지막으로, 2D UV 텍스처에서 발생하는 시각적 불일치 문제를 해결하기 위해 differentiable rendering 기반의 멀티뷰 스타일 전이 방식을 적용하여 3D 모델의 시각적 일관성을 확보하였다.
+1. Laplacian, Sobel, Canny Edge Detector를 활용하여 콘텐츠 이미지의 경계 정보를 추출하고, 스타일 전이 결과 이미지와 비교하여 디테일을 보존하는 Edge Loss를 설계하였다.
+
+2. 기존 픽셀 기반 콘텐츠 손실 함수 대신 SSIM(Structural Similarity Index) 기반의 콘텐츠 손실 함수를 적용하여 시각적 유사성과 구조적 일관성을 유지하였다.
+
+3. 스타일 전이 후 뭉개진 저주파 성분을 제거하고 고주파 성분을 복원하기 위해 Guided Filter를 활용한 후처리 과정을 적용하였다.
+
+4. 콘텐츠 이미지에 패턴이 부족하여 스타일 전이가 잘 이루어지지 않는 경우를 보완하고자 Gaussian 노이즈를 추가하여 스타일의 패턴이 더욱 효과적으로 전이되도록 유도하였다.
+
+5. 2D UV 텍스처에서 발생하는 시각적 불일치 문제를 해결하기 위해 differentiable rendering 기반의 멀티뷰 스타일 전이 방식을 적용하여 3D 모델의 시각적 일관성을 확보하였다.
 ---
+## Code Instruction
+### 로스 모듈을 수정한 스타일 전이  
+```bash
+python TestArtistic.py
+```
+trainingOutput 폴더에 있는 .pth 파일을 지정하여 원하는 엣지 디텍터 기반 모델과 SSIM Loss로 대체된 모델을 선택해 사용할 수 있다.
 
-## Tested on
+###렌더링을 통한 스타일 전이
+python Texture.py
+원하는 obj와 그에 맞는 기존 텍스처 이미지가 필요함
+
+노이즈 추가
+python Blur.py
+패턴이 나타나지 않는 경우, 콘텐츠 이미지에 노이즈를 추가함
+
 - Python = 3.7.1
 - PyTorch = 1.7.1 + cu110
 - OpenCV = 4.11.0.86
@@ -14,8 +36,15 @@
 
 All code has been tested on **Windows** with the above versions.
 ---
-
 ## Result
+![alt text](image.png)
+Edge loss에 대한 결과
+![alt text](image-1.png)
+content loss를 ssim loss로 대체한 결과
+![alt text](image-2.png)
+Guided Filter를 통한 후처리 결과
+![alt text](image-3.png)
+렌더링을 이용한 스타일 전이 결과
 
 ---
 
