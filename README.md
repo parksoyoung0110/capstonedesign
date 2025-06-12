@@ -2,7 +2,9 @@
 
 본 프로젝트는 스타일 전이 과정에서 자주 손실되는 텍스처의 구조적 디테일을 효과적으로 보존하는 것을 목표로 하였으며, 이를 위해 다음과 같은 기술적 접근을 적용하였다.
 
-1. Laplacian, Sobel, Canny Edge Detector를 활용하여 콘텐츠 이미지의 경계 정보를 추출하고, 스타일 전이 결과 이미지와 비교하여 디테일을 보존하는 Edge Loss를 설계하였다.
+1. 
+![alt text](image-4.png)
+Laplacian, Sobel, Canny Edge Detector를 활용하여 콘텐츠 이미지의 경계 정보를 추출하고, 스타일 전이 결과 이미지와 비교하여 디테일을 보존하는 Edge Loss를 설계하였다.
 
 2. 기존 픽셀 기반 콘텐츠 손실 함수 대신 SSIM(Structural Similarity Index) 기반의 콘텐츠 손실 함수를 적용하여 시각적 유사성과 구조적 일관성을 유지하였다.
 
@@ -10,7 +12,9 @@
 
 4. 콘텐츠 이미지에 패턴이 부족하여 스타일 전이가 잘 이루어지지 않는 경우를 보완하고자 Gaussian 노이즈를 추가하여 스타일의 패턴이 더욱 효과적으로 전이되도록 유도하였다.
 
-5. 2D UV 텍스처에서 발생하는 시각적 불일치 문제를 해결하기 위해 differentiable rendering 기반의 멀티뷰 스타일 전이 방식을 적용하여 3D 모델의 시각적 일관성을 확보하였다.
+5. 
+![alt text](image-5.png)
+2D UV 텍스처에서 발생하는 시각적 불일치 문제를 해결하기 위해 differentiable rendering 기반의 멀티뷰 스타일 전이 방식을 적용하여 3D 모델의 시각적 일관성을 확보하였다.
 ---
 ## Code Instruction
 1. 로스 모듈을 수정한 스타일 전이(Edge Loss, SSIM Loss)
